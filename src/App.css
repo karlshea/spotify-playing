@@ -1,6 +1,36 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+}
+
+.current-playing {
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.current-playing--bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-size: cover;
+  box-shadow: 0 0 300px rgba(0,0,0,0.9) inset;
+
+  filter: blur(100px) brightness(0.6);
+}
+
+.current-playing-content {
+  position: relative;
+}
+
+.current-playing-content img {
+  box-shadow: 0 0 100px 1px black;
 }
