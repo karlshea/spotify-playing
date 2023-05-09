@@ -8,6 +8,7 @@ import CurrentTrack from './components/CurrentTrack.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
 
 const INTERVAL = 3000;
+
 const App = () => {
   const { token } = useContext(AuthContext);
 

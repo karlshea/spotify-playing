@@ -1,10 +1,5 @@
 import { useContext } from 'react';
-import {
-  AuthContext,
-  AuthProvider,
-  TAuthConfig,
-  TRefreshTokenExpiredEvent,
-} from 'react-oauth2-code-pkce';
+import { AuthContext, AuthProvider, TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
 
@@ -19,10 +14,10 @@ const authConfig: TAuthConfig = {
     window.location.pathname,
   scope: 'user-read-currently-playing',
   decodeToken: false,
-  onRefreshTokenExpire: (event: TRefreshTokenExpiredEvent) =>
+  /*onRefreshTokenExpire: (event: TRefreshTokenExpiredEvent) =>
     window.confirm(
       'Session expired. Refresh page to continue using the site?'
-    ) && event.login(),
+    ) && event.login(),*/
 };
 
 const SecuredApp = () => {

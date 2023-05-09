@@ -1,7 +1,13 @@
 :root {
+  box-sizing: border-box;
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  /*color: rgba(255, 255, 255, 0.87);*/
+
+  color: #fff;
   background-color: #242424;
+
+  font-family: 'Montserrat', sans-serif;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -16,9 +22,15 @@ body {
   min-height: 100vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  line-height: 1;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  /*:root {
     color: #213547;
     background-color: #ffffff;
-  }
+  }*/
 }
