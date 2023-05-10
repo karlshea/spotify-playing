@@ -4,6 +4,7 @@ import axios from 'axios';
 const ONE_SECOND = 1000;
 
 const BACKLIGHT_TIMEOUT = import.meta.env.VITE_BACKLIGHT_TIMEOUT;
+const DISABLE_SET_BACKLIGHT = import.meta.env.VITE_DISABLE_SET_BACKLIGHT;
 
 const NotPlaying = () => {
   const [date, setDate] = useState(new Date());
@@ -19,14 +20,17 @@ const NotPlaying = () => {
   }, []);
 
   // Set backlight power.
-  const setBacklightPowered = (power: boolean) =>
-    axios
+  const setBacklightPowered = (power: boolean) => {
+    if (DISABLE_SET_BACKLIGHT) return;
+
+    return axios
       .get(import.meta.env.VITE_BACKLIGHT_URL, {
-        params: { power: power ? 'on' : 'off' },
+        params: {power: power ? 'on' : 'off'},
       })
       .catch((error: unknown) => {
         console.log(error);
       });
+  };
 
   // Disable backlight after the timeout, and re-enable it on component unmount.
   useEffect(() => {

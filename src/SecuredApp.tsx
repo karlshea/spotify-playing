@@ -22,7 +22,7 @@ const authConfig: TAuthConfig = {
   autoLogin: false,
 
   // Spotify refresh tokens don't expire.
-  refreshTokenExpiresIn: 8.64e14,
+  refreshTokenExpiresIn: 8.64e13,
 };
 
 const SecuredApp = () => {
