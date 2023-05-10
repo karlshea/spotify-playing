@@ -25,7 +25,7 @@
     background-size: cover;
     box-shadow: 0 0 15cqw rgba(32, 32, 32, 0.6) inset;
 
-    filter: blur(100px) brightness(0.8);
+    filter: blur(70px) brightness(0.8);
   }
 
   .current-playing--content {
