@@ -1,19 +1,19 @@
 import React from 'react';
 
-interface CurrentTrackProps {
+interface TrackProps {
   track: SpotifyApi.TrackObjectFull;
 }
 
-const CurrentTrack: React.FC<CurrentTrackProps> = ({ track }) => {
+const Track: React.FC<TrackProps> = ({ track }) => {
   return (
-    <div className="current-playing">
+    <div className="currently-playing">
       <div
-        className="current-playing--bg"
+        className="currently-playing--bg"
         style={{ backgroundImage: `url(${track.album.images[0].url}` }}
       ></div>
 
-      <div className="current-playing--content">
-        <div className="current-playing--content--inner">
+      <div className="currently-playing--content">
+        <div className="currently-playing--content--inner">
           <img src={track.album.images[0].url} />
 
           <h1>{track.name}</h1>
@@ -27,4 +27,4 @@ const CurrentTrack: React.FC<CurrentTrackProps> = ({ track }) => {
   );
 };
 
-export default CurrentTrack;
+export default Track;

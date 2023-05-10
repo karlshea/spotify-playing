@@ -3,9 +3,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
-import CurrentEpisode from './components/current-playing/CurrentEpisode.tsx';
-import CurrentNull from './components/current-playing/CurrentNull.tsx';
-import CurrentTrack from './components/current-playing/CurrentTrack.tsx';
+import CurrentlyPlaying from './components/CurrentlyPlaying.tsx';
 import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
 
@@ -56,25 +54,7 @@ const App = () => {
     return <NotPlaying />;
   }
 
-  if (currentlyPlaying.currently_playing_type === 'track') {
-    return currentlyPlaying.item ? (
-      <CurrentTrack
-        track={currentlyPlaying.item as SpotifyApi.TrackObjectFull}
-      />
-    ) : (
-      <CurrentNull />
-    );
-  }
-
-  if (currentlyPlaying.currently_playing_type === 'episode') {
-    return (
-      <CurrentEpisode
-        episode={currentlyPlaying.item as SpotifyApi.EpisodeObjectFull}
-      />
-    );
-  }
-
-  return <h1>Unknown State</h1>;
+  return <CurrentlyPlaying currentlyPlaying={currentlyPlaying} />;
 };
 
 export default App;

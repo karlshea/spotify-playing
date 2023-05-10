@@ -3,7 +3,7 @@
   text-align: center;
 }
 
-.current-playing {
+.currently-playing {
   width: 100vw;
   height: 100vh;
 
@@ -13,9 +13,9 @@
   justify-content: center;
   align-items: center;
 
-  container: current-playing / inline-size;
+  container: currently-playing / inline-size;
 
-  .current-playing--bg {
+  .currently-playing--bg {
     position: absolute;
     top: 0;
     right: 0;
@@ -28,15 +28,15 @@
     filter: blur(70px) brightness(0.8);
   }
 
-  &.current-playing--null .current-playing--bg {
+  &.currently-playing--null .currently-playing--bg {
     background: #2b59b2; /* Spotify DJ color. */
   }
 
-  .current-playing--content {
+  .currently-playing--content {
     position: relative;
     width: 100%;
 
-    .current-playing--content--inner {
+    .currently-playing--content--inner {
       padding: 2cqh 6cqw;
 
       font-size: 1cqi;
@@ -88,6 +88,20 @@
       font-style: italic;
     }
   }
+}
+
+.current-playlist {
+  width: 100vw;
+  height: 100vh;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-size: cover;
+  box-shadow: 0 0 15cqw rgba(32, 32, 32, 0.6) inset;
 }
 
 .not-playing {
