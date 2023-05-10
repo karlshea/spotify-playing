@@ -3,8 +3,9 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
-import CurrentEpisode from './components/CurrentEpisode.tsx';
-import CurrentTrack from './components/CurrentTrack.tsx';
+import CurrentEpisode from './components/current-playing/CurrentEpisode.tsx';
+import CurrentTrack from './components/current-playing/CurrentTrack.tsx';
+import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
 
 const INTERVAL = 3000;
@@ -12,10 +13,14 @@ const INTERVAL = 3000;
 const App = () => {
   const { token } = useContext(AuthContext);
 
+  const [loading, setLoading] = useState(true);
+
   const [currentlyPlaying, setCurrentlyPlaying] =
     useState<SpotifyApi.CurrentlyPlayingObject | null>();
 
   const getCurrentlyPlaying = useCallback(() => {
+    setLoading(true);
+
     axios
       .get('https://api.spotify.com/v1/me/player/currently-playing', {
         headers: {
@@ -29,6 +34,7 @@ const App = () => {
         if (response.status === 200) {
           setCurrentlyPlaying(response.data);
         }
+        setLoading(false);
       });
   }, [token]);
 
@@ -38,6 +44,10 @@ const App = () => {
 
     return () => clearInterval(id);
   }, [getCurrentlyPlaying]);
+
+  if (!currentlyPlaying && loading) {
+    return <Loading />;
+  }
 
   if (!currentlyPlaying) {
     return <NotPlaying />;

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { AuthContext, AuthProvider, TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
+import Login from './components/Login.tsx';
 
 const authConfig: TAuthConfig = {
   clientId: import.meta.env.VITE_CLIENT_ID,
@@ -13,17 +14,21 @@ const authConfig: TAuthConfig = {
     window.location.host +
     window.location.pathname,
   scope: 'user-read-currently-playing',
+
+  // Spotify token not a JWT.
   decodeToken: false,
-  /*onRefreshTokenExpire: (event: TRefreshTokenExpiredEvent) =>
-    window.confirm(
-      'Session expired. Refresh page to continue using the site?'
-    ) && event.login(),*/
+
+  // Seem to need to set this otherwise it tries to login even with a refresh token on app launch.
+  autoLogin: false,
+
+  // Spotify refresh tokens don't expire.
+  refreshTokenExpiresIn: 8.64e14,
 };
 
 const SecuredApp = () => {
-  const { token } = useContext(AuthContext);
+  const { token, loginInProgress } = useContext(AuthContext);
 
-  return token ? <App /> : null;
+  return token && !loginInProgress ? <App /> : <Login />;
 };
 
 const WrappedSecuredApp = () => (
