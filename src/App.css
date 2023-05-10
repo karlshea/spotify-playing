@@ -28,6 +28,10 @@
     filter: blur(70px) brightness(0.8);
   }
 
+  &.current-playing--null .current-playing--bg {
+    background: #2b59b2; /* Spotify DJ color. */
+  }
+
   .current-playing--content {
     position: relative;
     width: 100%;

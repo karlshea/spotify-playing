@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
 import CurrentEpisode from './components/current-playing/CurrentEpisode.tsx';
+import CurrentNull from './components/current-playing/CurrentNull.tsx';
 import CurrentTrack from './components/current-playing/CurrentTrack.tsx';
 import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
@@ -56,10 +57,12 @@ const App = () => {
   }
 
   if (currentlyPlaying.currently_playing_type === 'track') {
-    return (
+    return currentlyPlaying.item ? (
       <CurrentTrack
         track={currentlyPlaying.item as SpotifyApi.TrackObjectFull}
       />
+    ) : (
+      <CurrentNull />
     );
   }
 
