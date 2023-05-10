@@ -13,7 +13,8 @@ const INTERVAL = 3000;
 const App = () => {
   const { token } = useContext(AuthContext);
 
-  const [loading, setLoading] = useState(true);
+  const [previouslyLoaded, setPreviouslyLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [currentlyPlaying, setCurrentlyPlaying] =
     useState<SpotifyApi.CurrentlyPlayingObject | null>();
@@ -35,6 +36,7 @@ const App = () => {
           setCurrentlyPlaying(response.data);
         }
         setLoading(false);
+        setPreviouslyLoaded(true);
       });
   }, [token]);
 
@@ -45,7 +47,7 @@ const App = () => {
     return () => clearInterval(id);
   }, [getCurrentlyPlaying]);
 
-  if (!currentlyPlaying && loading) {
+  if (!currentlyPlaying && !previouslyLoaded && loading) {
     return <Loading />;
   }
 
