@@ -61,21 +61,28 @@
     }
 
     /* Major third, ratio 1.250 */
+    /* Then x 1.2 */
+
+    /*
+    1: 3.052
+    2: 2.441
+    3: 1.953
+    */
 
     & h1 {
-      font-size: 3.052cqi;
+      font-size: 3.6624cqi;
       font-weight: 700;
       margin-block-end: 0.3em;
     }
 
     & h2 {
-      font-size: 2.441cqi;
+      font-size: 2.9292cqi;
       font-weight: 500;
-      margin-block-end: 0.55em;
+      margin-block-end: 0.5em;
     }
 
     & h3 {
-      font-size: 1.953cqi;
+      font-size: 2.3436cqi;
       font-weight: 500;
       font-style: italic;
     }
