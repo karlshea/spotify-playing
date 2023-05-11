@@ -21,11 +21,14 @@ const NotPlaying = () => {
 
   // Set backlight power.
   const setBacklightPowered = (power: boolean) => {
-    if (DISABLE_SET_BACKLIGHT) return;
+    console.info(`${power ? 'Enabling' : 'Disabling'} backlight`);
+    if (DISABLE_SET_BACKLIGHT) {
+      return;
+    }
 
     return axios
       .get(import.meta.env.VITE_BACKLIGHT_URL, {
-        params: {power: power ? 'on' : 'off'},
+        params: { power: power ? 'on' : 'off' },
       })
       .catch((error: unknown) => {
         console.log(error);

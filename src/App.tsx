@@ -13,7 +13,7 @@ const App = () => {
   const { token } = useContext(AuthContext);
 
   const [previouslyLoaded, setPreviouslyLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [currentlyPlaying, setCurrentlyPlaying] =
     useState<SpotifyApi.CurrentlyPlayingObject | null>();
