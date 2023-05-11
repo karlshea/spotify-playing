@@ -1,3 +1,7 @@
+:root {
+  --snp--transition-time: 0.5s;
+}
+
 #root {
   padding: 0;
   text-align: center;
@@ -26,6 +30,8 @@
     box-shadow: 0 0 15cqw rgba(32, 32, 32, 0.6) inset;
 
     filter: blur(70px) brightness(0.8);
+
+    transition: background-image var(--snp--transition-time) ease-in-out;
   }
 
   &.currently-playing--null .currently-playing--bg {
@@ -37,18 +43,26 @@
     width: 100%;
 
     .currently-playing--content--inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
       padding: 2cqh 6cqw;
 
       font-size: 1cqi;
     }
 
-    & img {
+    .currently-playing--image {
       box-shadow: 0 0 5cqw 0.5cqw rgba(32, 32, 32, 0.9);
       border-radius: 0.5rem;
       margin-bottom: 2.5cqi;
 
       max-width: 78cqw;
       height: auto;
+      object-fit: contain;
+
+      transition: background-image var(--snp--transition-time) ease-in-out;
     }
 
     & h1,
