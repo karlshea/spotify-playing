@@ -1,8 +1,9 @@
 import './App.css';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
+import useRequest from './api/useRequest.ts';
 import CurrentlyPlaying from './components/CurrentlyPlaying.tsx';
 import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
@@ -12,39 +13,40 @@ const INTERVAL = 3000;
 const App = () => {
   const { token } = useContext(AuthContext);
 
-  const [previouslyLoaded, setPreviouslyLoaded] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const getCurrentlyPlaying = useCallback(
+    () =>
+      axios
+        .get<SpotifyApi.CurrentlyPlayingObject | null>(
+          'https://api.spotify.com/v1/me/player/currently-playing',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          if (response.status === 204) {
+            response.data = null;
+          }
 
-  const [currentlyPlaying, setCurrentlyPlaying] =
-    useState<SpotifyApi.CurrentlyPlayingObject | null>();
+          return response;
+        }),
+    [token]
+  );
 
-  const getCurrentlyPlaying = useCallback(() => {
-    setLoading(true);
-
-    axios
-      .get('https://api.spotify.com/v1/me/player/currently-playing', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        if (response.status === 204) {
-          setCurrentlyPlaying(null);
-        }
-        if (response.status === 200) {
-          setCurrentlyPlaying(response.data);
-        }
-        setLoading(false);
-        setPreviouslyLoaded(true);
-      });
-  }, [token]);
+  const {
+    loading,
+    previouslyLoaded,
+    data: currentlyPlaying,
+    loadData,
+  } = useRequest(getCurrentlyPlaying);
 
   useEffect(() => {
-    const id = setInterval(getCurrentlyPlaying, INTERVAL);
-    getCurrentlyPlaying();
+    const id = setInterval(loadData, INTERVAL);
+    loadData();
 
     return () => clearInterval(id);
-  }, [getCurrentlyPlaying]);
+  }, [loadData]);
 
   if (!currentlyPlaying && !previouslyLoaded && loading) {
     return <Loading />;
