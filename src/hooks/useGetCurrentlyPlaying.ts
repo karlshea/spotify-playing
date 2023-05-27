@@ -38,12 +38,18 @@ const useGetCurrentlyPlaying = (enable: boolean) => {
   } = useRequest(getCurrentlyPlaying);
 
   useEffect(() => {
-    if (enable) {
-      const id = setInterval(loadData, INTERVAL);
-      loadData();
+    let id: number | undefined = undefined;
 
-      return () => clearInterval(id);
+    if (enable) {
+      id = setInterval(loadData, INTERVAL);
+      loadData();
     }
+
+    return () => {
+      if (id) {
+        clearInterval(id);
+      }
+    };
   }, [loadData, enable]);
 
   return {

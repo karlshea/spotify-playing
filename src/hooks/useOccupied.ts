@@ -14,8 +14,6 @@ const useOccupied = () => {
       .get(`${HA_URL}/api/states/${HA_ENTITY}`, {
         headers: {
           Authorization: `Bearer ${HA_TOKEN}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
         },
       })
       .then((response) => {
