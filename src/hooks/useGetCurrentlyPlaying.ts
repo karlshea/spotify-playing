@@ -6,7 +6,7 @@ import useRequest from '../api/useRequest.ts';
 
 const INTERVAL = import.meta.env.VITE_SPOTIFY_INTERVAL;
 
-const useGetCurrentlyPlaying = () => {
+const useGetCurrentlyPlaying = (enable: boolean) => {
   const { token } = useContext(AuthContext);
 
   const getCurrentlyPlaying = useCallback(
@@ -38,11 +38,13 @@ const useGetCurrentlyPlaying = () => {
   } = useRequest(getCurrentlyPlaying);
 
   useEffect(() => {
-    const id = setInterval(loadData, INTERVAL);
-    loadData();
+    if (enable) {
+      const id = setInterval(loadData, INTERVAL);
+      loadData();
 
-    return () => clearInterval(id);
-  }, [loadData]);
+      return () => clearInterval(id);
+    }
+  }, [loadData, enable]);
 
   return {
     loading,

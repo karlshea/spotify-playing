@@ -6,10 +6,10 @@ import useGetCurrentlyPlaying from './hooks/useGetCurrentlyPlaying.ts';
 import useOccupied from './hooks/useOccupied.ts';
 
 const App = () => {
-  const { loading, previouslyLoaded, currentlyPlaying } =
-    useGetCurrentlyPlaying();
-
   const occupied = useOccupied();
+
+  const { loading, previouslyLoaded, currentlyPlaying } =
+    useGetCurrentlyPlaying(occupied);
 
   if (!currentlyPlaying && !previouslyLoaded && loading) {
     return <Loading />;
