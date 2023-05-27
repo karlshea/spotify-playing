@@ -7,6 +7,7 @@ const BACKLIGHT_TIMEOUT = import.meta.env.VITE_BACKLIGHT_TIMEOUT;
 const DISABLE_SET_BACKLIGHT = JSON.parse(
   import.meta.env.VITE_DISABLE_SET_BACKLIGHT
 );
+const BACKLIGHT_URL = import.meta.env.VITE_BACKLIGHT_URL;
 
 const NotPlaying = () => {
   const [date, setDate] = useState(new Date());
@@ -33,7 +34,7 @@ const NotPlaying = () => {
     console.info(`${power ? 'Enabling' : 'Disabling'} backlight`);
 
     return axios
-      .get(import.meta.env.VITE_BACKLIGHT_URL, {
+      .get(BACKLIGHT_URL, {
         params: { power: power ? 'on' : 'off' },
       })
       .catch((error: unknown) => {
