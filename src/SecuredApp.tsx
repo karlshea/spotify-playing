@@ -5,7 +5,7 @@ import App from './App';
 import Login from './components/Login.tsx';
 
 const authConfig: TAuthConfig = {
-  clientId: import.meta.env.VITE_CLIENT_ID,
+  clientId: import.meta.env.VITE_SPOTIFY_CLIENT_ID,
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
   redirectUri:
