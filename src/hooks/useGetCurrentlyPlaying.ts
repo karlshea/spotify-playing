@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
 import useRequest from '../api/useRequest.ts';
+import useDeepEqualMemo from './useDeepEqualMemo.ts';
 
 const INTERVAL = import.meta.env.VITE_SPOTIFY_INTERVAL;
 
@@ -25,17 +26,25 @@ const useGetCurrentlyPlaying = (enable: boolean) => {
             response.data = null;
           }
 
+          if (response.data) {
+            // Clear some of the values that we don't care about, but which
+            // cause the object to change.
+            response.data.actions.disallows = {};
+            response.data.timestamp = 0;
+            response.data.progress_ms = 0;
+            response.data.is_playing = true;
+          }
+
           return response;
         }),
     [token]
   );
 
-  const {
-    loading,
-    previouslyLoaded,
-    data: currentlyPlaying,
-    loadData,
-  } = useRequest(getCurrentlyPlaying);
+  const { loading, previouslyLoaded, data, loadData } =
+    useRequest(getCurrentlyPlaying);
+
+  const currentlyPlaying =
+    useDeepEqualMemo<SpotifyApi.CurrentlyPlayingObject | null>(data);
 
   useEffect(() => {
     let id: number | undefined = undefined;

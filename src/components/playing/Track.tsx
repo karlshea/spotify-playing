@@ -1,17 +1,21 @@
 import React from 'react';
 
+import useOnLoadImage from '../../hooks/useOnLoadImage.ts';
+
 interface TrackProps {
   track: SpotifyApi.TrackObjectFull;
 }
 
 const Track: React.FC<TrackProps> = ({ track }) => {
-  const image = track.album.images[0];
+  const trackImage = track.album.images[0];
+
+  const trackImageUrl = useOnLoadImage(trackImage.url);
 
   return (
     <div className="currently-playing">
       <div
         className="currently-playing--bg"
-        style={{ backgroundImage: `url(${image.url}` }}
+        style={{ backgroundImage: `url(${trackImageUrl}` }}
       ></div>
 
       <div className="currently-playing--content">
@@ -19,9 +23,9 @@ const Track: React.FC<TrackProps> = ({ track }) => {
           <div
             className="currently-playing--image"
             style={{
-              backgroundImage: `url(${image.url}`,
-              width: image.width,
-              aspectRatio: `${image.width} / ${image.height}`,
+              backgroundImage: `url(${trackImageUrl}`,
+              width: trackImage.width,
+              aspectRatio: `${trackImage.width} / ${trackImage.height}`,
             }}
           ></div>
 
