@@ -2,16 +2,12 @@ import './App.css';
 import CurrentlyPlaying from './components/CurrentlyPlaying.tsx';
 import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';
-import useGetCurrentlyPlaying from './hooks/useGetCurrentlyPlaying.ts';
-import useOccupied from './hooks/useOccupied.ts';
+import usePlayingApplication from './hooks/usePlayingApplication.ts';
 
 const App = () => {
-  const occupied = useOccupied();
+  const { currentlyPlaying, occupied, showLoading } = usePlayingApplication();
 
-  const { loading, previouslyLoaded, currentlyPlaying } =
-    useGetCurrentlyPlaying(occupied);
-
-  if (!currentlyPlaying && !previouslyLoaded && loading) {
+  if (showLoading) {
     return <Loading />;
   }
 
