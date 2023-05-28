@@ -1,6 +1,6 @@
-import useBacklightTimeout from './useBacklightTimeout.ts';
 import useGetCurrentlyPlaying from './useGetCurrentlyPlaying.ts';
 import useOccupied from './useOccupied.ts';
+import useScreenTimeout from './useScreenTimeout.ts';
 
 const usePlayingApplication = () => {
   const occupied = useOccupied();
@@ -11,7 +11,7 @@ const usePlayingApplication = () => {
   const showLoading = !currentlyPlaying && !previouslyLoaded && loading,
     notPlaying = !(currentlyPlaying && occupied);
 
-  useBacklightTimeout(notPlaying);
+  useScreenTimeout(notPlaying);
 
   return {
     currentlyPlaying,
