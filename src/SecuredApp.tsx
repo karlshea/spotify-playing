@@ -4,15 +4,15 @@ import { AuthContext, AuthProvider, TAuthConfig } from 'react-oauth2-code-pkce';
 import App from './App';
 import Login from './components/Login.tsx';
 
+const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+
+const location = window.location;
+
 const authConfig: TAuthConfig = {
-  clientId: import.meta.env.VITE_SPOTIFY_CLIENT_ID,
+  clientId: SPOTIFY_CLIENT_ID,
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
-  redirectUri:
-    window.location.protocol +
-    '//' +
-    window.location.host +
-    window.location.pathname,
+  redirectUri: `${location.protocol}//${location.host}${location.pathname}`,
   scope: 'user-read-currently-playing',
 
   // Spotify token not a JWT.

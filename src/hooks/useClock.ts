@@ -7,9 +7,8 @@ const useClock = () => {
 
   useEffect(() => {
     const timerId = setInterval(() => setDate(new Date()), ONE_SECOND);
-    return () => {
-      clearInterval(timerId);
-    };
+
+    return () => clearInterval(timerId);
   }, []);
 
   return date.toLocaleTimeString([], { timeStyle: 'short' });
