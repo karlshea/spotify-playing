@@ -18,7 +18,8 @@ const authConfig: TAuthConfig = {
   // Spotify token not a JWT.
   decodeToken: false,
 
-  // Seem to need to set this otherwise it tries to login even with a refresh token on app launch.
+  // Seem to need to set this otherwise it tries to log in even with a refresh
+  // token on app launch.
   autoLogin: false,
 
   // Spotify refresh tokens don't expire.
