@@ -41,6 +41,22 @@ Create `/etc/sudoers.d/screen` containing
 www-data ALL=(ALL) NOPASSWD: /root/screen.sh on, /root/screen.sh off
 ```
 
+### Occupancy
+
+Add a Home Assistant boolean entity to your .env.production. For example, I 
+have a helper entity that I toggle with a "when people are home" automation in
+HomeKit which is named `input_boolean.homekit_occupied`.
+
+You will have to enable CORS in your Home Assistant configuration for the domain
+the React app is running on.
+
+```yaml
+http:
+  cors_allowed_origins:
+    - http://localhost:5173
+    - https://spotify-playing
+```
+
 ## Helpers
 
 It may be helpful to use `xdotool` to reload Chromium without needing to VNC 
