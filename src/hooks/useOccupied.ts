@@ -5,10 +5,10 @@ const INTERVAL = import.meta.env.VITE_OCCUPIED_INTERVAL;
 const HA_URL = import.meta.env.VITE_HA_URL;
 const HA_ENTITY = import.meta.env.VITE_HA_ENTITY;
 const HA_TOKEN = import.meta.env.VITE_HA_TOKEN;
-const DISABLE_OCCUPANCY = JSON.parse(import.meta.env.VITE_DISABLE_OCCUPANCY);
+const ENABLE_OCCUPANCY = JSON.parse(import.meta.env.VITE_ENABLE_OCCUPANCY);
 
 const useOccupied = () => {
-  const [occupied, setOccupied] = useState(!DISABLE_OCCUPANCY);
+  const [occupied, setOccupied] = useState(ENABLE_OCCUPANCY);
 
   const updateIsOccupied = useCallback(() => {
     axios
@@ -26,7 +26,7 @@ const useOccupied = () => {
   }, []);
 
   useEffect(() => {
-    if (DISABLE_OCCUPANCY) {
+    if (!ENABLE_OCCUPANCY) {
       console.info('Occupancy detection disabled');
       return;
     }

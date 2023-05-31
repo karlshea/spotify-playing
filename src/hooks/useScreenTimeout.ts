@@ -3,13 +3,15 @@ import axios from 'axios';
 
 const SCREEN_TIMEOUT = import.meta.env.VITE_SCREEN_TIMEOUT;
 const SCREEN_URL = import.meta.env.VITE_SCREEN_URL;
-const DISABLE_SET_SCREEN_STATE = JSON.parse(
-  import.meta.env.VITE_DISABLE_SET_SCREEN_STATE
+const ENABLE_SET_SCREEN_STATE = JSON.parse(
+  import.meta.env.VITE_ENABLE_SET_SCREEN_STATE
 );
 
 const setScreenState = (enable: boolean) => {
-  if (DISABLE_SET_SCREEN_STATE) {
-    console.info(`${enable ? 'Enabling' : 'Disabling'} screen (suppressed)`);
+  if (!ENABLE_SET_SCREEN_STATE) {
+    console.info(
+      `Screen set state disabled (${enable ? 'Enabling' : 'Disabling'} screen)`
+    );
     return;
   }
 
