@@ -51,11 +51,28 @@
       padding: 2cqh 6cqw;
 
       font-size: 1cqi;
+
+      /* Spotify logo */
+      &:after {
+        --logo-dim: max(2cqw, 70px); /* Spotify logo must be 70px or larger. */
+
+        position: absolute;
+        top: calc(var(--logo-dim) / 2); /* Ensure min exclusion zone, which is half of logo height */
+        left: calc(var(--logo-dim) / 2);
+        display: block;
+
+        width: var(--logo-dim);
+        height: var(--logo-dim);
+
+        content: '';
+        /*background: url('./assets/Spotify_Icon_RGB_White.png') no-repeat;*/
+        background-size: contain;
+        opacity: 0.5;
+      }
     }
 
     .currently-playing--image {
       box-shadow: 0 0 5cqw 0.5cqw rgba(32, 32, 32, 0.9);
-      border-radius: 0.5rem;
       margin-bottom: 2.5cqi;
 
       max-width: 78cqw;
@@ -72,6 +89,7 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       line-height: 1.1;
+      width: 100%;
     }
 
     /* Major third, ratio 1.250 */
