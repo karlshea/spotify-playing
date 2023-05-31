@@ -77,7 +77,7 @@
 
       max-width: 78cqw;
       height: auto;
-      object-fit: contain;
+      background-size: contain;
 
       transition: background-image var(--snp--transition-time) ease-in-out;
     }
