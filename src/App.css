@@ -110,6 +110,7 @@
     & h2 {
       font-size: 3.1733cqi;
       font-weight: 500;
+      font-style: italic;
       margin-block-end: 0.45em;
     }
 
@@ -117,7 +118,6 @@
       /*font-size: 2.5389cqi;*/
       font-size: 3.1733cqi;
       font-weight: 500;
-      font-style: italic;
     }
   }
 }

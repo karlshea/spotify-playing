@@ -31,9 +31,9 @@ const Track: React.FC<TrackProps> = ({ track }) => {
 
           <h1>{track.name}</h1>
 
-          <h2>{track.artists.map((artist) => artist.name).join(', ')}</h2>
+          <h2>{track.album.name}</h2>
 
-          <h3>{track.album.name}</h3>
+          <h3>{track.artists.map((artist) => artist.name).join(', ')}</h3>
         </div>
       </div>
     </div>
