@@ -21,7 +21,7 @@ const useOccupied = () => {
         setOccupied(response.data.state === 'on');
       })
       .catch((error: unknown) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 

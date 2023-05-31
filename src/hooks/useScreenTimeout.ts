@@ -20,7 +20,7 @@ const setScreenState = (enable: boolean) => {
       params: { enable: enable ? 'on' : 'off' },
     })
     .catch((error: unknown) => {
-      console.log(error);
+      console.error(error);
     });
 };
 
