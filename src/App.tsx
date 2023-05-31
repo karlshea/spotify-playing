@@ -1,4 +1,5 @@
 import './App.css';
+
 import CurrentlyPlaying from './components/CurrentlyPlaying.tsx';
 import Loading from './components/Loading.tsx';
 import NotPlaying from './components/NotPlaying.tsx';

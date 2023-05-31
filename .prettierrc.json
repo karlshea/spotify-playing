@@ -13,10 +13,5 @@
     "",
     "^[./]"
   ],
-  "importOrderSortSpecifiers": true,
-  "importOrderGroupNamespaceSpecifiers": true,
-  "importOrderBuiltinModulesToTop": true,
-  "importOrderMergeDuplicateImports": true,
-  "importOrderCaseInsensitive": true,
   "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"]
 }
