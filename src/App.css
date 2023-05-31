@@ -31,6 +31,10 @@
 
     filter: blur(70px) brightness(0.8);
 
+    @media (prefers-color-scheme: dark) {
+      filter: blur(70px) brightness(0.4);
+    }
+
     transition: background-image var(--snp--transition-time) ease-in-out;
   }
 
