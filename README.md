@@ -3,6 +3,8 @@
 A React app meant for a Raspberry Pi Zero 2 W with a Hyperpixel 4.0 Square 
 display.
 
+<img src="assets/screenshot.jpeg" alt="Example screenshot" />
+
 ## Architecture
 
 The React app can be hosted either directly on the Pi, or somewhere else. 
