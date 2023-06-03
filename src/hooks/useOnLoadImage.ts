@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useOnLoadImage = (url: string) => {
-  const [loadedUrl, setLoadedUrl] = useState<string | null>();
+  const [loadedUrl, setLoadedUrl] = useState<string | null>(url);
 
   useEffect(() => {
     if (!url) {
