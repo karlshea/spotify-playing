@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import useOnLoadImage from '../../hooks/useOnLoadImage.ts';
+import useLoadedImage from '../../hooks/useLoadedImage.ts';
 import BackgroundBlurred from '../background/BackgroundBlurred.tsx';
 import BackgroundColor from '../background/BackgroundColor.tsx';
+
+import TrackObjectFull = SpotifyApi.TrackObjectFull;
 
 interface TrackProps {
   track: SpotifyApi.TrackObjectFull;
@@ -11,17 +13,25 @@ interface TrackProps {
 const USE_BLUR = JSON.parse(import.meta.env.VITE_PLAYING_USE_BLUR);
 
 const Track: React.FC<TrackProps> = ({ track }) => {
-  const trackImage = track.album.images[0];
+  const image = useLoadedImage(track.album.images[0].url);
 
-  const trackImageUrl = useOnLoadImage(trackImage.url);
+  // Cache the old track until the image loads so all transitions happen at once.
+  const [cachedTrack, setCachedTrack] = useState<TrackObjectFull>(track);
+  useEffect(() => {
+    if (image && image.src === track.album.images[0].url) {
+      setCachedTrack(track);
+    }
+  }, [image, track]);
+
+  const cachedTrackImage = cachedTrack.album.images[0];
 
   return (
     <div className="currently-playing">
-      {trackImageUrl ? (
+      {image ? (
         USE_BLUR ? (
-          <BackgroundBlurred url={trackImageUrl} />
+          <BackgroundBlurred url={image.src} />
         ) : (
-          <BackgroundColor url={trackImageUrl} />
+          <BackgroundColor image={image} />
         )
       ) : null}
 
@@ -30,17 +40,17 @@ const Track: React.FC<TrackProps> = ({ track }) => {
           <div
             className="currently-playing--image"
             style={{
-              backgroundImage: `url(${trackImageUrl}`,
-              width: trackImage.width,
-              aspectRatio: `${trackImage.width} / ${trackImage.height}`,
+              backgroundImage: image ? `url(${image.src}` : undefined,
+              width: cachedTrackImage.width,
+              aspectRatio: `${cachedTrackImage.width} / ${cachedTrackImage.height}`,
             }}
           />
 
-          <h1>{track.name}</h1>
+          <h1>{cachedTrack.name}</h1>
 
-          <h2>{track.album.name}</h2>
+          <h2>{cachedTrack.album.name}</h2>
 
-          <h3>{track.artists.map((artist) => artist.name).join(', ')}</h3>
+          <h3>{cachedTrack.artists.map((artist) => artist.name).join(', ')}</h3>
         </div>
       </div>
     </div>
