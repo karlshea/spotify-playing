@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import useLoadedImage from '../../hooks/useLoadedImage.ts';
+import useImageCanvas from '../../hooks/useImageCanvas.ts';
 import BackgroundBlurred from '../background/BackgroundBlurred.tsx';
 import BackgroundColor from '../background/BackgroundColor.tsx';
 
@@ -13,25 +13,25 @@ interface TrackProps {
 const USE_BLUR = JSON.parse(import.meta.env.VITE_PLAYING_USE_BLUR);
 
 const Track: React.FC<TrackProps> = ({ track }) => {
-  const image = useLoadedImage(track.album.images[0].url);
+  const { canvas, loadedUrl } = useImageCanvas(track.album.images[0].url);
 
   // Cache the old track until the image loads so all transitions happen at once.
   const [cachedTrack, setCachedTrack] = useState<TrackObjectFull>(track);
   useEffect(() => {
-    if (image && image.src === track.album.images[0].url) {
+    if (loadedUrl === track.album.images[0].url) {
       setCachedTrack(track);
     }
-  }, [image, track]);
+  }, [loadedUrl, track]);
 
   const cachedTrackImage = cachedTrack.album.images[0];
 
   return (
     <div className="currently-playing">
-      {image ? (
+      {canvas ? (
         USE_BLUR ? (
-          <BackgroundBlurred url={image.src} />
+          <BackgroundBlurred url={canvas.toDataURL()} />
         ) : (
-          <BackgroundColor image={image} />
+          <BackgroundColor canvas={canvas} />
         )
       ) : null}
 
@@ -40,7 +40,9 @@ const Track: React.FC<TrackProps> = ({ track }) => {
           <div
             className="currently-playing--image"
             style={{
-              backgroundImage: image ? `url(${image.src}` : undefined,
+              backgroundImage: canvas
+                ? `url(${canvas.toDataURL()})`
+                : undefined,
               width: cachedTrackImage.width,
               aspectRatio: `${cachedTrackImage.width} / ${cachedTrackImage.height}`,
             }}

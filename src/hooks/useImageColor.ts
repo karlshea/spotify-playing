@@ -1,20 +1,10 @@
 import { useEffect, useState } from 'react';
 import { createPalette } from 'modern-palette';
 
-const useImageColor = (image: HTMLImageElement) => {
+const useImageColor = (canvas: HTMLCanvasElement) => {
   const [color, setColor] = useState<string | undefined>();
 
   useEffect(() => {
-    const canvas = new OffscreenCanvas(0, 0);
-    const context = canvas.getContext('2d', { alpha: false });
-
-    if (!context) return;
-
-    canvas.width = image.naturalWidth;
-    canvas.height = image.naturalHeight;
-
-    context.drawImage(image, 0, 0);
-
     const palette = createPalette({
       maxColors: 4,
       samples: [canvas],
@@ -39,7 +29,7 @@ const useImageColor = (image: HTMLImageElement) => {
     }
 
     setColor(selectedColor);
-  }, [image]);
+  }, [canvas]);
 
   return color;
 };

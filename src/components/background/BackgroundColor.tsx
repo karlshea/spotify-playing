@@ -3,11 +3,11 @@ import React from 'react';
 import useImageColor from '../../hooks/useImageColor.ts';
 
 interface BackgroundColorProps {
-  image: HTMLImageElement;
+  canvas: HTMLCanvasElement;
 }
 
-const BackgroundColor: React.FC<BackgroundColorProps> = ({ image }) => {
-  const color = useImageColor(image);
+const BackgroundColor: React.FC<BackgroundColorProps> = ({ canvas }) => {
+  const color = useImageColor(canvas);
 
   return (
     <div
