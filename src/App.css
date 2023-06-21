@@ -26,16 +26,23 @@
     bottom: 0;
     left: 0;
 
-    background-size: cover;
-    box-shadow: 0 0 15cqw rgba(32, 32, 32, 0.6) inset;
+    &.use-blur {
+      background-size: cover;
+      box-shadow: 0 0 15cqw rgba(32, 32, 32, 0.6) inset;
 
-    filter: blur(70px) brightness(0.8);
+      filter: blur(70px) brightness(0.8);
 
-    @media (prefers-color-scheme: dark) {
-      filter: blur(70px) brightness(0.4);
+      @media (prefers-color-scheme: dark) {
+        filter: blur(70px) brightness(0.4);
+      }
+
+      transition: background-image var(--snp--transition-time) ease-in-out;
     }
 
-    transition: background-image var(--snp--transition-time) ease-in-out;
+    &.use-color {
+      transition: background-color var(--snp--transition-time) ease-in-out;
+      filter: brightness(0.8);
+    }
   }
 
   &.currently-playing--null .currently-playing--bg {

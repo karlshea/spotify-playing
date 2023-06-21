@@ -19,6 +19,10 @@ const useOnLoadImage = (url: string) => {
     image.addEventListener('error', () => updateStatus(image), { once: true });
 
     image.src = url;
+
+    return () => {
+      image.remove();
+    };
   }, [url]);
 
   return loadedUrl;

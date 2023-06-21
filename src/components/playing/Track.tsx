@@ -1,10 +1,14 @@
 import React from 'react';
 
 import useOnLoadImage from '../../hooks/useOnLoadImage.ts';
+import BackgroundBlurred from '../background/BackgroundBlurred.tsx';
+import BackgroundColor from '../background/BackgroundColor.tsx';
 
 interface TrackProps {
   track: SpotifyApi.TrackObjectFull;
 }
+
+const USE_BLUR = JSON.parse(import.meta.env.VITE_PLAYING_USE_BLUR);
 
 const Track: React.FC<TrackProps> = ({ track }) => {
   const trackImage = track.album.images[0];
@@ -13,10 +17,13 @@ const Track: React.FC<TrackProps> = ({ track }) => {
 
   return (
     <div className="currently-playing">
-      <div
-        className="currently-playing--bg"
-        style={{ backgroundImage: `url(${trackImageUrl}` }}
-      ></div>
+      {trackImageUrl ? (
+        USE_BLUR ? (
+          <BackgroundBlurred url={trackImageUrl} />
+        ) : (
+          <BackgroundColor url={trackImageUrl} />
+        )
+      ) : null}
 
       <div className="currently-playing--content">
         <div className="currently-playing--content--inner">
@@ -27,7 +34,7 @@ const Track: React.FC<TrackProps> = ({ track }) => {
               width: trackImage.width,
               aspectRatio: `${trackImage.width} / ${trackImage.height}`,
             }}
-          ></div>
+          />
 
           <h1>{track.name}</h1>
 
