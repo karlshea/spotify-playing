@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { createPalette } from 'modern-palette';
 
-const useImageColor = (canvas: HTMLCanvasElement) => {
+const useImageColor = (canvas: HTMLCanvasElement, loadedUrl: string | null) => {
   const [color, setColor] = useState<string | undefined>();
 
   useEffect(() => {
+    if (!loadedUrl) {
+      setColor('#000000');
+      return;
+    }
+
     const palette = createPalette({
       maxColors: 4,
       samples: [canvas],
@@ -29,7 +34,7 @@ const useImageColor = (canvas: HTMLCanvasElement) => {
     }
 
     setColor(selectedColor);
-  }, [canvas]);
+  }, [canvas, loadedUrl]);
 
   return color;
 };

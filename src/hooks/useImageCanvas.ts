@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const useImageCanvas = (url: string) => {
-  const [data, setData] = useState<{
-    loadedUrl?: string;
-    canvas?: HTMLCanvasElement;
-  }>({});
+  const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
+
+  const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!url) {
-      setData({});
+    if (!canvasRef.current || !url) {
+      setLoadedUrl(null);
       return;
     }
 
-    const updateCanvas = (image: HTMLImageElement) => {
-      const canvas = document.createElement('canvas');
+    const canvas = canvasRef.current;
 
+    const updateCanvas = (image: HTMLImageElement) => {
       const context = canvas.getContext('2d', { alpha: false });
 
       if (!(context && image.complete)) {
-        setData({});
+        setLoadedUrl(null);
         return;
       }
 
@@ -27,10 +26,7 @@ const useImageCanvas = (url: string) => {
 
       context.drawImage(image, 0, 0);
 
-      setData({
-        loadedUrl: image.src,
-        canvas,
-      });
+      setLoadedUrl(image.src);
     };
 
     const image = new Image();
@@ -46,7 +42,10 @@ const useImageCanvas = (url: string) => {
     };
   }, [url]);
 
-  return data;
+  return {
+    canvas: canvasRef.current,
+    loadedUrl,
+  };
 };
 
 export default useImageCanvas;

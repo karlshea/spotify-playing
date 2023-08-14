@@ -3,7 +3,7 @@ import React from 'react';
 import Episode from './playing/Episode.tsx';
 import NoItem from './playing/NoItem.tsx';
 import PlaylistDJ from './playing/PlaylistDJ.tsx';
-import Track from './playing/Track.tsx';
+import Track from './track/Track.tsx';
 
 interface CurrentlyPlayingProps {
   currentlyPlaying: SpotifyApi.CurrentlyPlayingObject;
