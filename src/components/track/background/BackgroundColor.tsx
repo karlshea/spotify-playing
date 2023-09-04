@@ -1,17 +1,12 @@
 import React from 'react';
 
 import useImageColor from '../../../hooks/useImageColor.ts';
+import useTrackImageProvider from '../useTrackImageProvider.ts';
 
-interface BackgroundColorProps {
-  canvas: HTMLCanvasElement;
-  loadedUrl: string | null;
-}
+const BackgroundColor: React.FC = () => {
+  const { sourceCanvas, loadedUrl } = useTrackImageProvider();
 
-const BackgroundColor: React.FC<BackgroundColorProps> = ({
-  canvas,
-  loadedUrl,
-}) => {
-  const color = useImageColor(canvas, loadedUrl);
+  const color = useImageColor(sourceCanvas, loadedUrl);
 
   return (
     <div

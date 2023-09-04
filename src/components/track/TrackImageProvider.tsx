@@ -1,9 +1,11 @@
 import React, { useEffect, createContext, useCallback, useRef } from 'react';
 
 interface ITrackImageContext {
+  sourceCanvas: HTMLCanvasElement;
+  loadedUrl: string | null;
   trackImageCanvasSubscriber: (
     id: string
-  ) => (instance: HTMLCanvasElement | null) => void;
+  ) => (instance: HTMLCanvasElement) => void;
 }
 
 export const TrackImageContext = createContext<ITrackImageContext | undefined>(
@@ -47,7 +49,9 @@ const TrackImageProvider: React.FC<TrackImageProviderProps> = ({
   }, [sourceCanvas, loadedUrl]);
 
   return (
-    <TrackImageContext.Provider value={{ trackImageCanvasSubscriber }}>
+    <TrackImageContext.Provider
+      value={{ sourceCanvas, loadedUrl, trackImageCanvasSubscriber }}
+    >
       {children}
     </TrackImageContext.Provider>
   );

@@ -30,11 +30,7 @@ const Track: React.FC<TrackProps> = ({ track }) => {
   return (
     <TrackImageProvider sourceCanvas={canvas} loadedUrl={loadedUrl}>
       <div className="currently-playing">
-        {USE_BLUR ? (
-          <BackgroundBlurred />
-        ) : (
-          <BackgroundColor loadedUrl={loadedUrl} canvas={canvas} />
-        )}
+        {USE_BLUR ? <BackgroundBlurred /> : <BackgroundColor />}
 
         <Content track={cachedTrack} />
       </div>
