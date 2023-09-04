@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { AuthContext, AuthProvider, TAuthConfig } from 'react-oauth2-code-pkce';
+import { AuthContext, AuthProvider } from 'react-oauth2-code-pkce';
+import type { TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
 import Login from './components/Login.tsx';

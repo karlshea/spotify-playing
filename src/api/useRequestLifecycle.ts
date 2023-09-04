@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from 'react';
-import { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
 import { produce } from 'immer';
 
 export type RequestLifecycleState<T> = {
