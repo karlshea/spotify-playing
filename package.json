@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.5.0",
     "immer": "^10.0.2",
     "lodash": "^4.17.21",
     "modern-palette": "^0.2.4",
@@ -21,18 +21,18 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@types/lodash": "^4.14.197",
-    "@types/react": "^18.2.20",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/spotify-api": "^0.0.22",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
     "@vitejs/plugin-react": "^4.0.4",
-    "eslint": "^8.47.0",
+    "eslint": "^8.48.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss-nesting": "^12.0.1",
-    "prettier": "^3.0.1",
-    "typescript": "^5.1.6",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2",
     "vite": "^4.4.9"
   }
 }
