@@ -5,7 +5,7 @@ import { AuthContext } from 'react-oauth2-code-pkce';
 import useRequest from '../api/useRequest.ts';
 import useDeepEqualMemo from './useDeepEqualMemo.ts';
 
-const INTERVAL = import.meta.env.VITE_SPOTIFY_INTERVAL;
+import AppEnv from '../AppEnv.ts';
 
 const useGetCurrentlyPlaying = (enable: boolean) => {
   const { token } = useContext(AuthContext);
@@ -50,7 +50,7 @@ const useGetCurrentlyPlaying = (enable: boolean) => {
     let id: number | undefined = undefined;
 
     if (enable) {
-      id = setInterval(loadData, INTERVAL);
+      id = setInterval(loadData, AppEnv.SPOTIFY_INTERVAL);
       loadData();
     }
 

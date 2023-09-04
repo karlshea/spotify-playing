@@ -3,13 +3,12 @@ import { AuthContext, AuthProvider, TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
 import Login from './components/Login.tsx';
-
-const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+import AppEnv from './AppEnv';
 
 const location = window.location;
 
 const authConfig: TAuthConfig = {
-  clientId: SPOTIFY_CLIENT_ID,
+  clientId: AppEnv.SPOTIFY_CLIENT_ID,
   authorizationEndpoint: 'https://accounts.spotify.com/authorize',
   tokenEndpoint: 'https://accounts.spotify.com/api/token',
   redirectUri: `${location.protocol}//${location.host}${location.pathname}`,

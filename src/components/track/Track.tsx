@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+import AppEnv from '../../AppEnv.ts';
+
 import TrackObjectFull = SpotifyApi.TrackObjectFull;
 
 interface TrackProps {
   track: SpotifyApi.TrackObjectFull;
 }
-
-const USE_BLUR = JSON.parse(import.meta.env.VITE_PLAYING_USE_BLUR);
 
 import useImageCanvas from '../../hooks/useImageCanvas.ts';
 import TrackImageProvider from './TrackImageProvider.tsx';
@@ -30,7 +30,7 @@ const Track: React.FC<TrackProps> = ({ track }) => {
   return (
     <TrackImageProvider sourceCanvas={canvas} loadedUrl={loadedUrl}>
       <div className="currently-playing">
-        {USE_BLUR ? <BackgroundBlurred /> : <BackgroundColor />}
+        {AppEnv.PLAYING_USE_BLUR ? <BackgroundBlurred /> : <BackgroundColor />}
 
         <Content track={cachedTrack} />
       </div>

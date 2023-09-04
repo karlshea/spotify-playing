@@ -1,20 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 
-const INTERVAL = import.meta.env.VITE_OCCUPIED_INTERVAL;
-const HA_URL = import.meta.env.VITE_HA_URL;
-const HA_ENTITY = import.meta.env.VITE_HA_ENTITY;
-const HA_TOKEN = import.meta.env.VITE_HA_TOKEN;
-const ENABLE_OCCUPANCY = JSON.parse(import.meta.env.VITE_ENABLE_OCCUPANCY);
+import AppEnv from '../AppEnv.ts';
 
 const useOccupied = () => {
-  const [occupied, setOccupied] = useState(ENABLE_OCCUPANCY);
+  const [occupied, setOccupied] = useState<boolean>(AppEnv.ENABLE_OCCUPANCY);
 
   const updateIsOccupied = useCallback(() => {
     axios
-      .get(`${HA_URL}/api/states/${HA_ENTITY}`, {
+      .get(`${AppEnv.HA_URL}/api/states/${AppEnv.HA_ENTITY}`, {
         headers: {
-          Authorization: `Bearer ${HA_TOKEN}`,
+          Authorization: `Bearer ${AppEnv.HA_TOKEN}`,
         },
       })
       .then((response) => {
@@ -26,12 +22,12 @@ const useOccupied = () => {
   }, []);
 
   useEffect(() => {
-    if (!ENABLE_OCCUPANCY) {
+    if (!AppEnv.ENABLE_OCCUPANCY) {
       console.info('Occupancy detection disabled');
       return;
     }
 
-    const id = setInterval(updateIsOccupied, INTERVAL);
+    const id = setInterval(updateIsOccupied, AppEnv.OCCUPIED_INTERVAL);
     updateIsOccupied();
 
     return () => clearInterval(id);
