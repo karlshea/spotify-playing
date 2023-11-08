@@ -4,6 +4,7 @@ import type { TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
 import AppEnv from './AppEnv';
+import Loading from './components/Loading.tsx';
 import Login from './components/Login.tsx';
 
 const location = window.location;
@@ -25,7 +26,15 @@ const authConfig: TAuthConfig = {
 const SecuredApp = () => {
   const { token, loginInProgress } = useContext(AuthContext);
 
-  return token && !loginInProgress ? <App /> : <Login />;
+  if (token && !loginInProgress) {
+    return <App />;
+  }
+
+  if (loginInProgress) {
+    return <Loading />;
+  }
+
+  return <Login />;
 };
 
 const WrappedSecuredApp = () => (
