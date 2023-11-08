@@ -26,12 +26,12 @@ const authConfig: TAuthConfig = {
 const SecuredApp = () => {
   const { token, loginInProgress } = useContext(AuthContext);
 
-  if (token && !loginInProgress) {
-    return <App />;
-  }
-
   if (loginInProgress) {
     return <Loading />;
+  }
+
+  if (token) {
+    return <App />;
   }
 
   return <Login />;
