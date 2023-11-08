@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+
 import { TrackImageContext } from './TrackImageProvider.tsx';
 
 const useTrackImageProvider = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useCallback, useRef } from 'react';
+import React, { createContext, useCallback, useEffect, useRef } from 'react';
 
 interface ITrackImageContext {
   sourceCanvas: HTMLCanvasElement;
@@ -21,6 +21,7 @@ interface TrackImageProviderProps {
 const TrackImageProvider: React.FC<TrackImageProviderProps> = ({
   sourceCanvas,
   loadedUrl,
+
   children,
 }) => {
   const canvasRefs = useRef<Map<string, HTMLCanvasElement>>(new Map());

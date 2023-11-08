@@ -4,6 +4,7 @@
   "trailingComma": "es5",
   "endOfLine": "auto",
   "semi": true,
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
   "importOrder": [
     "^react$",
     "^react-dom$",

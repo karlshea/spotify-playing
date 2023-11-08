@@ -1,6 +1,8 @@
 import React from 'react';
-import TrackObjectFull = SpotifyApi.TrackObjectFull;
+
 import useTrackImageProvider from './useTrackImageProvider.ts';
+
+import TrackObjectFull = SpotifyApi.TrackObjectFull;
 
 interface ContentProps {
   track: TrackObjectFull;

@@ -3,9 +3,8 @@ import axios from 'axios';
 import { AuthContext } from 'react-oauth2-code-pkce';
 
 import useRequest from '../api/useRequest.ts';
-import useDeepEqualMemo from './useDeepEqualMemo.ts';
-
 import AppEnv from '../AppEnv.ts';
+import useDeepEqualMemo from './useDeepEqualMemo.ts';
 
 const useGetCurrentlyPlaying = (enable: boolean) => {
   const { token } = useContext(AuthContext);

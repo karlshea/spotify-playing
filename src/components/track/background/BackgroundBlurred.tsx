@@ -1,4 +1,5 @@
 import React from 'react';
+
 import useTrackImageProvider from '../useTrackImageProvider.ts';
 
 const BackgroundBlurred: React.FC = () => {
