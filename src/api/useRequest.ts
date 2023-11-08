@@ -37,8 +37,11 @@ export const useRequest = <T>(
 
   // Reset and load data when the callback changes.
   useEffect(() => {
-    actions.reset();
-    loadData();
+    void loadData();
+
+    return () => {
+      actions.reset();
+    };
   }, [actions, loadData]);
 
   return {

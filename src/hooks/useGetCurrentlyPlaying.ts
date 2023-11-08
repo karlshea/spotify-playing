@@ -51,7 +51,7 @@ const useGetCurrentlyPlaying = (enable: boolean) => {
 
     if (enable) {
       id = setInterval(loadData, AppEnv.SPOTIFY_INTERVAL);
-      loadData();
+      void loadData();
     }
 
     return () => {
