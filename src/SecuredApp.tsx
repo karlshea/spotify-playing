@@ -4,8 +4,8 @@ import type { TAuthConfig } from 'react-oauth2-code-pkce';
 
 import App from './App';
 import AppEnv from './AppEnv';
-import Loading from './components/Loading.tsx';
 import Login from './components/Login.tsx';
+import Status from './components/Status.tsx';
 
 const location = window.location;
 
@@ -27,7 +27,7 @@ const SecuredApp = () => {
   const { token, loginInProgress } = useContext(AuthContext);
 
   if (loginInProgress) {
-    return <Loading />;
+    return <Status message="Logging in..." />;
   }
 
   if (token) {
