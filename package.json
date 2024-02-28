@@ -13,7 +13,7 @@
     "axios": "^1.6.7",
     "immer": "^10.0.3",
     "lodash": "^4.17.21",
-    "modern-palette": "^0.2.4",
+    "modern-palette": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-oauth2-code-pkce": "^1.17.2"
